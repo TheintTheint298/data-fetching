@@ -13,7 +13,7 @@ export default function AvailablePlaces({ onSelectPlace }) {
       setIsFetching(true);
 
       try {
-        const response = await fetch("http://localhost:3000/placesss");
+        const response = await fetch("http://localhost:3000/places");
         const resData = await response.json();
 
         if (!response.ok) {
@@ -22,7 +22,10 @@ export default function AvailablePlaces({ onSelectPlace }) {
 
         setAvailablePlaces(resData.places);
       } catch (error) {
-        setError(error);
+        setError({
+          message:
+            error.message || "Could not fetch places, please try again later.",
+        });
       }
 
       setIsFetching(false);
